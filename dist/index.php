@@ -189,26 +189,71 @@
                                     <p class="item-intro text-muted">Lighting control, color temperature control</p>
                                     <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/1.jpg" alt="..." />
                                     <p>일반적으로 고도의 집중력과 분석 능력을 요구하는 수학과 과학을 공부할 때는 푸른빛을 띠는 6000K, 국어와 영어 등 어학 공부를 할 때는 5000K, 예술성과 감수성이 중요한 미술, 음악, 체육 등의 과목을 공부할 때는 조금더 온화한 3000K의 색온도가 적절합니다.</p>
-                                    <button class="btn btn-md light-1" type="button">
-                                        <i class="fas fa-pie-chart me-1"></i>
-                                        수학/과학
-                                    </button>
-                                    <button class="btn btn-primary btn-md light-2" type="button">
-                                        <i class="fas fa-book me-1"></i>
-                                        국어/영어
-                                    </button>
-                                    <button class="btn btn-primary btn-md light-3" type="button">
-                                        <i class="fas fa-music me-1"></i>
-                                        미술/음악/체육
-                                    </button>
+                                    <form style="display: inline-block;"action="../../DB/save_color.php" method="GET" target="iframe">
+                                        <input type="hidden" name="color" value="blue">
+                                        <button class="btn btn-md light-1" type="submit">
+                                            <i class="fas fa-pie-chart me-1"></i>
+                                            수학/과학
+                                        </button>
+                                    </form>
+                                    <form style="display: inline-block;" action="../../DB/save_color.php" method="GET" target="iframe">
+                                        <input type="hidden" name="color" value="white">
+                                        <button class="btn btn-md light-2" type="submit">
+                                            <i class="fas fa-book me-1"></i>
+                                            국어/영어
+                                        </button>
+                                    </form>
+                                    <form style="display: inline-block;" action="../../DB/save_color.php" method="GET" target="iframe">
+                                        <input type="hidden" name="color" value="red">
+                                        <button class="btn btn-md light-3" type="submit">
+                                            <i class="fas fa-music me-1"></i>
+                                            미술/음악/체육
+                                        </button>
+                                    </form>
+                                    <form style="display: inline-block;" action="../../DB/save_color.php" method="GET" target="iframe">
+                                        <input type="hidden" name="color" value="none">
+                                        <button class="btn btn-md light-4" type="submit">
+                                            <i class="fas fa-remove me-1"></i>
+                                            중단하기
+                                        </button>
+                                    </form>
+                                    <iframe id="iframe" name="iframe" style="display:none"></iframe>
                                     <ul class="list-inline">
                                         <li>
-                                            <strong>Light:</strong>
-                                            나중에 라이트값 받아오기
+                                            <strong>Light Value:</strong>
+<?php
+include_once "../../DB/lib.php";
+$db = new db();
+
+$db->get("select light from light order by seq desc limit 1",$rs,$rn);
+echo $rs[0]['light'];
+
+$db->finish();
+?>
                                         </li>
                                         <li>
-                                            <strong>Color:</strong>
-                                            None(선택한 색온도 띄우기)
+                                            <strong>Led Value:</strong>
+<?php
+include_once "../../DB/lib.php";
+$db = new db();
+
+$db->get("select led from light order by seq desc limit 1",$rs,$rn);
+echo $rs[0]['led'];
+
+$db->finish();
+?>
+                                        </li>
+                                        <li>
+                                            <strong>RGB Color:</strong>
+<?php
+include_once "../../DB/lib.php";
+$db = new db();
+
+$db->get("select rgbcolor from rgb order by seq desc limit 1",$rs,$rn);
+echo $rs[0]['rgbcolor'];
+
+$db->finish();
+?>
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
@@ -239,11 +284,27 @@
                                     <ul class="list-inline">
                                         <li>
                                             <strong>Temperature:</strong>
-                                            온도
+<?php
+include_once "../../DB/lib.php";
+$db = new db();
+
+$db->get("select temperature from dht order by seq desc limit 1",$rs,$rn);
+echo $rs[0]['temperature'];
+
+$db->finish();
+?>
                                         </li>
                                         <li>
                                             <strong>Humidity:</strong>
-                                            습도
+<?php
+include_once "../../DB/lib.php";
+$db = new db();
+
+$db->get("select humidity from dht order by seq desc limit 1",$rs,$rn);
+echo $rs[0]['humidity'];
+
+$db->finish();
+?>
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
@@ -274,11 +335,27 @@
                                     <ul class="list-inline">
                                         <li>
                                             <strong>Distance:</strong>
-                                            거리
+<?php
+include_once "../../DB/lib.php";
+$db = new db();
+
+$db->get("select distance from distance order by seq desc limit 1",$rs,$rn);
+echo $rs[0]['distance'];
+
+$db->finish();
+?>
                                         </li>
                                         <li>
                                             <strong>Buzzer:</strong>
-                                            On/Off
+                                            <?php
+include_once "../../DB/lib.php";
+$db = new db();
+
+$db->get("select buzzer from distance order by seq desc limit 1",$rs,$rn);
+echo $rs[0]['buzzer'];
+
+$db->finish();
+?>
                                         </li>
                                     </ul>
                                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
